@@ -39,16 +39,10 @@ public class TestReadFiles {
 
         }catch (java.lang.NullPointerException ex){
             System.out.println(System.getProperty("user.dir"));
-            Path currentRelativePath = Paths.get("");
-            String s = currentRelativePath.toAbsolutePath().toString();
-            System.out.println("Current relative path is: " + s);
         }
         catch (NotFoundDirectory notFoundDirectory) {
             System.out.println(notFoundDirectory.getMessage());
             System.out.println(System.getProperty("user.dir"));
-            Path currentRelativePath = Paths.get("");
-            String s = currentRelativePath.toAbsolutePath().toString();
-            System.out.println("Current relative path is: " + s);
         } catch (EmptyDirectoryException e) {
             e.printStackTrace();
         }
