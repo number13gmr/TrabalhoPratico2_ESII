@@ -35,7 +35,7 @@ public class TestReadFiles {
 
         int n = 0;
         try {
-            n = m.readFiles("./Files").length;
+            n = m.readFiles("Files").length;
 
         }catch (java.lang.NullPointerException ex){
             System.out.println(System.getProperty("user.dir"));
