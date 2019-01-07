@@ -33,11 +33,10 @@ public class TestReadFiles {
         int n = 0;
         try {
             n = m.readFiles("Files").length;
-            System.out.println(System.getProperty("user.dir"));
         } catch (EmptyDirectoryException e) {
             e.printStackTrace();
         } catch (NotFoundDirectory notFoundDirectory) {
-            notFoundDirectory.printStackTrace();
+            System.out.println(System.getProperty("user.dir"));
         }
         Assertions.assertEquals(3,n);
     }
