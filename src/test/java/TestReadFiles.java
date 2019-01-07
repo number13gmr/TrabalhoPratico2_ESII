@@ -32,7 +32,7 @@ public class TestReadFiles {
 
         int n = 0;
         try {
-            n = m.readFiles("Files").length;
+            n = m.readFiles(    "/var/lib/jenkins/workspace/Grupo6/Files").length;
 
         }catch (java.lang.NullPointerException ex){
             System.out.println(System.getProperty("user.dir"));
