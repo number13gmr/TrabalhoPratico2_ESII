@@ -35,7 +35,7 @@ public class MotorDeBusca {
             }
             //Adiciona o conteudo dos ficheiros a um vetor de string
             for (int i = 0; i < filesName.length; i++) {
-                File file = new File(directoryName + "\\" + filesName[i]);
+                File file = new File(directoryName + "/" + filesName[i]);
 
                 BufferedReader b = null;
 
