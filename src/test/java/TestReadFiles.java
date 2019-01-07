@@ -2,6 +2,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class TestReadFiles {
     private MotorDeBusca m;
 
@@ -32,14 +35,20 @@ public class TestReadFiles {
 
         int n = 0;
         try {
-            n = m.readFiles("/ws/Files").length;
+            n = m.readFiles("/Files").length;
 
         }catch (java.lang.NullPointerException ex){
             System.out.println(System.getProperty("user.dir"));
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            System.out.println("Current relative path is: " + s);
         }
         catch (NotFoundDirectory notFoundDirectory) {
             System.out.println(notFoundDirectory.getMessage());
             System.out.println(System.getProperty("user.dir"));
+            Path currentRelativePath = Paths.get("");
+            String s = currentRelativePath.toAbsolutePath().toString();
+            System.out.println("Current relative path is: " + s);
         } catch (EmptyDirectoryException e) {
             e.printStackTrace();
         }
