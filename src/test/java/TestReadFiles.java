@@ -10,8 +10,8 @@ public class TestReadFiles {
      */
 
     @BeforeEach
-    public void init(){
-        m=new MotorDeBusca();
+    public void init() {
+        m = new MotorDeBusca();
     }
 
     /**
@@ -20,7 +20,7 @@ public class TestReadFiles {
 
     @Test
     public void testReadFiles1() {
-        Assertions.assertThrows(NotFoundDirectory.class,() -> m.readFiles("test"));
+        Assertions.assertThrows(NotFoundDirectory.class, () -> m.readFiles("test"));
     }
 
     /**
@@ -28,26 +28,31 @@ public class TestReadFiles {
      */
 
     @Test
-    public void testReadFiles2(){
+    public void testReadFiles2() {
 
         int n = 0;
         try {
             n = m.readFiles("Files").length;
-        } catch (EmptyDirectoryException e) {
-            e.printStackTrace();
-        } catch (NotFoundDirectory notFoundDirectory) {
+
+        }catch (java.lang.NullPointerException ex){
             System.out.println(System.getProperty("user.dir"));
         }
-        Assertions.assertEquals(3,n);
+        catch (NotFoundDirectory notFoundDirectory) {
+            System.out.println(notFoundDirectory.getMessage());
+            System.out.println(System.getProperty("user.dir"));
+        } catch (EmptyDirectoryException e) {
+            e.printStackTrace();
+        }
+        Assertions.assertEquals(3, n);
+
     }
+        /**
+         * Caso de teste em que o diretorio existe mas nao contem ficheiros
+         */
 
-    /**
-     * Caso de teste em que o diretorio existe mas nao contem ficheiros
-     */
+        @Test
+        public void testReadFiles3 () {
+            Assertions.assertThrows(EmptyDirectoryException.class, () -> m.readFiles("Files2"));
+        }
 
-    @Test
-    public void testReadFiles3(){
-        Assertions.assertThrows(EmptyDirectoryException.class,() -> m.readFiles("Files2"));
     }
-
-}
