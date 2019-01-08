@@ -21,11 +21,11 @@ public class MotorDeBusca {
             throw new NotFoundDirectory();
         } else {
             //Conta o numero de ficheiros e lista-os
-            File[] fList = directory.listFiles(new FilenameFilter() {
+            File[] fList = directory.listFiles();/*new FilenameFilter() {
                 public boolean accept(File dir, String filename) {
                     return filename.endsWith(".txt");
                 }
-            });
+            });*/
             //Caso o diretorio esteja vazio
             if (fList.length == 0) {
                 throw new EmptyDirectoryException();
@@ -37,10 +37,6 @@ public class MotorDeBusca {
                 if (fList[i].getName().endsWith(".txt")) {
                     filesName[i] = fList[i].getName();
                 }
-            }
-            System.out.println("PRINT DOS FILES");
-            for (int i = 0; i < filesName.length; i++) {
-                System.out.println(filesName[i]);
             }
 
             //Adiciona o conteudo dos ficheiros a um vetor de string
