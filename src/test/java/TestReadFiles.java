@@ -37,6 +37,7 @@ public class TestReadFiles {
         try {
             n = m.readFiles("Files").length;
 
+
         }
         catch (NotFoundDirectory notFoundDirectory) {
             System.out.println(notFoundDirectory.getMessage());

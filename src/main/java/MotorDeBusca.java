@@ -9,6 +9,11 @@ public class MotorDeBusca {
     private String[] filesName;
     private String[] fileContent;
 
+    //Matriz com o numero de ocurrencias
+
+    private int[][] numeroOcurrences;
+
+
 
 
     /**
@@ -74,7 +79,43 @@ public class MotorDeBusca {
         }
     }
 
+    public void n_ocurrences(){
+
+        String[] xd={"Mario","Jorge"};
+
+        this.numeroOcurrences=new int[this.filesName.length][xd.length];
+
+        for(int i=0;i<this.filesName.length;i++){
+            for(int j=0;j<xd.length;j++) {
 
 
+                Matcher m = Pattern.compile(Pattern.quote(xd[j]), Pattern.CASE_INSENSITIVE).matcher(this.fileContent[i]);
+
+                int matches=0;
+                //Conta quantos encontrou
+                while(m.find()){
+                    matches++;
+                }
+                //Atribiu quantos encontrou
+                System.out.println("Encontrou:"+matches+" palavra"+xd[j]+" ficheiro"+this.fileContent[i]);
+                this.numeroOcurrences[i][j]=matches;
+            }
+        }
+
+        //Print da matriz
+        for(int i=0;i<this.filesName.length;i++){
+            for(int j=0;j<xd.length;j++){
+                System.out.print(this.numeroOcurrences[i][j]+" ");
+            }
+            System.out.println("");
+        }
+
+
+    }
 
 }
+
+
+
+
+
