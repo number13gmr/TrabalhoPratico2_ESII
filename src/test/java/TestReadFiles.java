@@ -37,12 +37,11 @@ public class TestReadFiles {
         try {
             n = m.readFiles("Files").length;
 
-        }catch (java.lang.NullPointerException ex){
-            System.out.println(System.getProperty("user.dir"));
+
         }
         catch (NotFoundDirectory notFoundDirectory) {
             System.out.println(notFoundDirectory.getMessage());
-            System.out.println(System.getProperty("user.dir"));
+
         } catch (EmptyDirectoryException e) {
             e.printStackTrace();
         }
