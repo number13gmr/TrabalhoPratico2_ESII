@@ -12,10 +12,10 @@ public class MotorTest {
             String query = ler.nextLine();
 
             System.out.println(query);
-            m.insertQuery(query);
+            m.optimizeQuery(query);
             //m.insertQuery("Pedro o de pode os");
-        } catch (MinimumCaracteresNeeded minimumCaracteresNeeded) {
-            minimumCaracteresNeeded.printStackTrace();
+        } catch (NotInAValidInterval notInAValidInterval) {
+            notInAValidInterval.printStackTrace();
         }
         String[] s=null;
         try {
