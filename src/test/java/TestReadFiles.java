@@ -2,15 +2,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class TestReadFiles {
     private MotorDeBusca m;
 
     /**
      * Metodo para inicializar o motor de busca
      */
+
 
     @BeforeEach
     public void init() {
@@ -21,7 +19,7 @@ public class TestReadFiles {
      * Caso de teste em que o diretorio nao existe
      */
 
-    @Test
+    //@Test
     public void testReadFiles1() {
         Assertions.assertThrows(NotFoundDirectory.class, () -> m.readFiles("test"));
     }
@@ -30,7 +28,7 @@ public class TestReadFiles {
      * Caso de teste em que o diretorio existe e tem 3 ficheiros
      */
 
-    @Test
+    //@Test
     public void testReadFiles2() {
 
         int n = 0;
@@ -38,8 +36,7 @@ public class TestReadFiles {
             n = m.readFiles("Files").length;
 
 
-        }
-        catch (NotFoundDirectory notFoundDirectory) {
+        } catch (NotFoundDirectory notFoundDirectory) {
             System.out.println(notFoundDirectory.getMessage());
 
         } catch (EmptyDirectoryException e) {
@@ -48,13 +45,14 @@ public class TestReadFiles {
         Assertions.assertEquals(3, n);
 
     }
-        /**
-         * Caso de teste em que o diretorio existe mas nao contem ficheiros
-         */
 
-        @Test
-        public void testReadFiles3 () {
-            Assertions.assertThrows(EmptyDirectoryException.class, () -> m.readFiles("Files2"));
-        }
+    /**
+     * Caso de teste em que o diretorio existe mas nao contem ficheiros
+     */
 
+    //@Test
+    public void testReadFiles3() {
+        Assertions.assertThrows(EmptyDirectoryException.class, () -> m.readFiles("Files2"));
     }
+
+}

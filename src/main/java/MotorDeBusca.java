@@ -90,10 +90,10 @@ public class MotorDeBusca {
      */
 
 
-    public String[] optimizeQuery(String query) throws MinimumCaracteresNeeded  {
+    public String[] optimizeQuery(String query) throws NotInAValidIntervalException {
 
-        if (query.length() < 2) {
-            throw new MinimumCaracteresNeeded();
+        if (query.length() < 2 || query.length() > 30) {
+            throw new NotInAValidIntervalException();
         }
         String[] stopwords;
 /////////////////////////////////////
