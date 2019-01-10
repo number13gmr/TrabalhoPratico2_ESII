@@ -45,9 +45,7 @@ public class MotorDeBusca {
             filesName = new String[fList.length];
             //Cria um vetor apenas com o nome dos ficheiros
             for (int i = 0; i < fList.length; i++) {
-              //  if (fList[i].getName().endsWith(".txt")) {
                     filesName[i] = fList[i].getName();
-                //}
             }
 
 
@@ -61,7 +59,6 @@ public class MotorDeBusca {
                 try {
                     b = new BufferedReader(new FileReader(file));
                 } catch (FileNotFoundException e) {
-                    System.out.println(filesName[i]);
                     System.out.println("Problema ao abrir o ficheiro");
                 }
                 String aux = "";
@@ -96,8 +93,6 @@ public class MotorDeBusca {
             throw new NotInAValidIntervalException();
         }
         String[] stopwords;
-/////////////////////////////////////
-        String[] queryOtimizada = null;
 
         List<String> lines = null;
 
@@ -136,15 +131,15 @@ public class MotorDeBusca {
             }
 
          //   this.optimizedQuery = novo.toArray(new String[0]);
-            queryOtimizada = novo.toArray(new String[0]);
+            this.optimizedQuery = novo.toArray(new String[0]);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
 
-       // return this.optimizedQuery;
-        return queryOtimizada;
+        return this.optimizedQuery;
+
     }
 
     /**
@@ -169,7 +164,7 @@ public class MotorDeBusca {
                     matches++;
                 }
                 //Atribiu quantos encontrou
-                System.out.println("Encontrou:" + matches + " palavra" + this.optimizedQuery[j] + " ficheiro" + this.fileContent[i]);
+               // System.out.println("Encontrou:" + matches + " palavra" + this.optimizedQuery[j] + " ficheiro" + this.fileContent[i]);
                 this.numeroOcurrences[i][j] = matches;
             }
         }
