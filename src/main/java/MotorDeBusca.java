@@ -13,11 +13,10 @@ public class MotorDeBusca {
 
     private String[] filesName;
     private String[] fileContent;
+    private String[] optimizedQuery;
 
     //Matriz com o numero de ocurrencias
-
     private int[][] numeroOcurrences;
-
 
     /**
      * @param directoryName , nome do diretorio que contém os ficheiros
@@ -46,14 +45,11 @@ public class MotorDeBusca {
             filesName = new String[fList.length];
             //Cria um vetor apenas com o nome dos ficheiros
             for (int i = 0; i < fList.length; i++) {
-                if (fList[i].getName().endsWith(".txt")) {
+              //  if (fList[i].getName().endsWith(".txt")) {
                     filesName[i] = fList[i].getName();
-                }
+                //}
             }
-            System.out.println("PRINT DOS FILES");
-            for (int i = 0; i < filesName.length; i++) {
-                System.out.println(filesName[i]);
-            }
+
 
             //Adiciona o conteudo dos ficheiros a um vetor de string
             for (int i = 0; i < filesName.length; i++) {
@@ -87,23 +83,18 @@ public class MotorDeBusca {
     }
 
 
-    public void insertQuery(String phrase) throws MinimumCaracteresNeeded {
+    /**
+     * Metodo resposavel por optimizar a Query, remover palavras que nao façam sentido procurar
+     * @param query String inserida pelo utilizador
+     * @return Query otimizada
+     */
 
 
-        if (phrase.length() < 3) {
+    public String[] optimizeQuery(String query) throws MinimumCaracteresNeeded  {
+
+        if (query.length() < 2) {
             throw new MinimumCaracteresNeeded();
-        } else {
-            String[] s = optimizeQuery(phrase);
-
-            for (int i = 0; i < s.length; i++) {
-                System.out.println(s[i]);
-            }
-
         }
-    }
-
-
-    public String[] optimizeQuery(String query) {
         String[] stopwords;
         String[] queryOtimizada = null;
 
@@ -152,17 +143,21 @@ public class MotorDeBusca {
         return queryOtimizada;
     }
 
-    public void n_ocurrences() {
+    /**
+     * Metodo responsavel por calcular o numero de ocurrencias da Query inserido pelo utlizador nos ficheiro
+     * @return matriz com um numero de ocurrencias de cada palavra nos ficheiros
+     */
+    public int[][] n_ocurrences() {
 
-        String[] xd = {"Mario", "Jorge"};
 
-        this.numeroOcurrences = new int[this.filesName.length][xd.length];
+
+        this.numeroOcurrences = new int[this.filesName.length][this.optimizedQuery.length];
 
         for (int i = 0; i < this.filesName.length; i++) {
-            for (int j = 0; j < xd.length; j++) {
+            for (int j = 0; j < this.optimizedQuery.length; j++) {
 
 
-                Matcher m = Pattern.compile(Pattern.quote(xd[j]), Pattern.CASE_INSENSITIVE).matcher(this.fileContent[i]);
+                Matcher m = Pattern.compile(Pattern.quote(this.optimizedQuery[j]), Pattern.CASE_INSENSITIVE).matcher(this.fileContent[i]);
 
                 int matches = 0;
                 //Conta quantos encontrou
@@ -170,18 +165,12 @@ public class MotorDeBusca {
                     matches++;
                 }
                 //Atribiu quantos encontrou
-                System.out.println("Encontrou:" + matches + " palavra" + xd[j] + " ficheiro" + this.fileContent[i]);
+                System.out.println("Encontrou:" + matches + " palavra" + this.optimizedQuery[j] + " ficheiro" + this.fileContent[i]);
                 this.numeroOcurrences[i][j] = matches;
             }
         }
 
-        //Print da matriz
-        for (int i = 0; i < this.filesName.length; i++) {
-            for (int j = 0; j < xd.length; j++) {
-                System.out.print(this.numeroOcurrences[i][j] + " ");
-            }
-            System.out.println("");
-        }
+     return this.numeroOcurrences;
     }
 
 }
