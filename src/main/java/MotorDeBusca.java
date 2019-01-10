@@ -1,5 +1,12 @@
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MotorDeBusca {
 
@@ -70,6 +77,72 @@ public class MotorDeBusca {
 
             return this.fileContent;
         }
+    }
+
+
+    public void insertQuery(String phrase) throws MinimumCaracteresNeeded {
+
+
+        if (phrase.length() < 3) {
+            throw new MinimumCaracteresNeeded();
+        } else {
+            String[] s = optimizeQuery(phrase);
+
+            for (int i = 0; i < s.length; i++) {
+                System.out.println(s[i]);
+            }
+
+        }
+    }
+
+
+    public String[] optimizeQuery(String query) {
+        String[] stopwords;
+        String[] queryOtimizada = null;
+
+        List<String> lines = null;
+
+        try {
+            lines = Files.readAllLines(Paths.get("stopwords.txt"), StandardCharsets.UTF_8);
+            stopwords = lines.toArray(new String[lines.size()]);
+            String stringStopwords = null;
+
+            //MOSTRA TODAS AS PALAVRAS DO STOPWORDS
+
+            for (int i = 0; i < stopwords.length; i++) {
+                if (i == 0) {
+                    stringStopwords = stopwords[i];
+                } else {
+                    stringStopwords += " " + stopwords[i];
+                }
+            }
+
+            //LIMPA QUERY
+            String[] split = null;
+            split = query.split(" ");
+            List<String> novo = new ArrayList<>();
+
+            for (int i = 0; i < split.length; i++) {
+                Matcher m = Pattern.compile(Pattern.quote(split[i]), Pattern.CASE_INSENSITIVE).matcher(stringStopwords);
+
+                int matches = 0;
+
+                while (m.find() && matches == 0) {
+                    matches++;
+                }
+
+                if (matches == 0) {
+                    novo.add(split[i]);
+                }
+            }
+
+            queryOtimizada = novo.toArray(new String[0]);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return queryOtimizada;
     }
 
 }

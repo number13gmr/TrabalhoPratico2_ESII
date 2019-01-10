@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
+public class MinimumCaracteresNeeded extends Exception {
 
-public class MinimumCaracteresNeeded {
+    public MinimumCaracteresNeeded() {
+        System.out.println("Minimo de 3 caracteres necessarios");
+    }
 }

@@ -1,8 +1,22 @@
+import java.util.Scanner;
+
 public class MotorTest {
     public static void main(String[] args) {
         MotorDeBusca m=new MotorDeBusca();
 
-       // m.insertQuery("Pedro o de pode os");
+        try {
+
+            System.out.println("Insira o que pretende pesquisar: ");
+
+            Scanner ler = new Scanner(System.in);
+            String query = ler.nextLine();
+
+            System.out.println(query);
+            m.insertQuery(query);
+            //m.insertQuery("Pedro o de pode os");
+        } catch (MinimumCaracteresNeeded minimumCaracteresNeeded) {
+            minimumCaracteresNeeded.printStackTrace();
+        }
         String[] s=null;
         try {
             s=m.readFiles("Files");
