@@ -14,7 +14,7 @@ public class OcurrencesTest {
             e.printStackTrace();
         } catch (NotFoundDirectory notFoundDirectory) {
             notFoundDirectory.printStackTrace();
-        }catch (MinimumCaracteresNeeded minimumCaracteresNeeded) {
+        }catch (NotInAValidIntervalException minimumCaracteresNeeded) {
             minimumCaracteresNeeded.printStackTrace();}
 
             int [][] ocurrences=m.n_ocurrences();
@@ -38,7 +38,7 @@ public class OcurrencesTest {
             e.printStackTrace();
         } catch (NotFoundDirectory notFoundDirectory) {
             notFoundDirectory.printStackTrace();
-        }catch (MinimumCaracteresNeeded minimumCaracteresNeeded) {
+        }catch (NotInAValidIntervalException minimumCaracteresNeeded) {
             minimumCaracteresNeeded.printStackTrace();}
 
         int [][] ocurrences=m.n_ocurrences();

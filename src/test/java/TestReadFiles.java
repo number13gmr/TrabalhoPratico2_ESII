@@ -19,7 +19,7 @@ public class TestReadFiles {
      * Caso de teste em que o diretorio nao existe
      */
 
-    //@Test
+    @Test
     public void testReadFiles1() {
         Assertions.assertThrows(NotFoundDirectory.class, () -> m.readFiles("test"));
     }
@@ -28,7 +28,7 @@ public class TestReadFiles {
      * Caso de teste em que o diretorio existe e tem 3 ficheiros
      */
 
-    //@Test
+    @Test
     public void testReadFiles2() {
 
         int n = 0;
@@ -50,7 +50,7 @@ public class TestReadFiles {
      * Caso de teste em que o diretorio existe mas nao contem ficheiros
      */
 
-    //@Test
+    @Test
     public void testReadFiles3() {
         Assertions.assertThrows(EmptyDirectoryException.class, () -> m.readFiles("Files2"));
     }
