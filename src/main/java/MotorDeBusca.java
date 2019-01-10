@@ -96,6 +96,7 @@ public class MotorDeBusca {
             throw new MinimumCaracteresNeeded();
         }
         String[] stopwords;
+/////////////////////////////////////
         String[] queryOtimizada = null;
 
         List<String> lines = null;
@@ -134,12 +135,15 @@ public class MotorDeBusca {
                 }
             }
 
+         //   this.optimizedQuery = novo.toArray(new String[0]);
             queryOtimizada = novo.toArray(new String[0]);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
+       // return this.optimizedQuery;
         return queryOtimizada;
     }
 
