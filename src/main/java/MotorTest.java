@@ -14,8 +14,8 @@ public class MotorTest {
             System.out.println(query);
             m.optimizeQuery(query);
             //m.insertQuery("Pedro o de pode os");
-        } catch (NotInAValidInterval notInAValidInterval) {
-            notInAValidInterval.printStackTrace();
+        } catch (NotInAValidIntervalException notInAValidIntervalException) {
+            notInAValidIntervalException.printStackTrace();
         }
         String[] s=null;
         try {
