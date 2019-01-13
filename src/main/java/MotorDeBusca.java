@@ -57,7 +57,6 @@ public class MotorDeBusca {
             for (int i = 0; i < filesName.length; i++) {
                 File file = new File(directoryName + "/" + filesName[i]);
 
-
                 BufferedReader b = null;
 
                 try {
@@ -105,10 +104,6 @@ public class MotorDeBusca {
             query = query.replaceAll("[0-9]", "");
             System.out.println(query + " QUERY *** ");
 
-            if(query.isEmpty()){
-
-            }
-
             lines = Files.readAllLines(Paths.get("stopwords.txt"), StandardCharsets.UTF_8);
             stopwords = lines.toArray(new String[lines.size()]);
             String stringStopwords = null;
@@ -144,8 +139,6 @@ public class MotorDeBusca {
                     novo.add(split[i]);
                 }
             }
-
-
 
             this.optimizedQuery = novo.toArray(new String[0]);
 
@@ -185,7 +178,6 @@ public class MotorDeBusca {
                 }
 
                 //Atribiu quantos encontrou
-                //System.out.println("Encontrou:" + matches + " palavra" + this.optimizedQuery[j] + " ficheiro" + this.fileContent[i]);
                 this.numeroOcurrences[i][j] = matches;
             }
         }
