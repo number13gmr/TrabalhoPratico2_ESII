@@ -267,14 +267,13 @@ public class MotorDeBusca {
         }
     }
 
-    public void similaridadeSuperior(double sup){
+    public void similaridadeSuperior(double sup) {
         this.sortFilesBySim();
 
-        
-        if(sup> this.grauSlim[0]){
+
+        if (sup > this.grauSlim[0]) {
             System.out.println("Nao existem ficheiros com grau superior ao inserido");
-        }
-        else {
+        } else {
 
 
             for (int i = 0; i < this.grauSlim.length; i++) {
@@ -282,7 +281,8 @@ public class MotorDeBusca {
                     System.out.println(this.filesName[i] + " " + this.grauSlim[i]);
                 }
             }
-
+        }
+    }
 
     public void showOnlyFiles(int nmrFiles) throws NotInAValidIntervalException{
         sortFilesBySim();
