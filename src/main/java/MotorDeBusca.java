@@ -102,7 +102,6 @@ public class MotorDeBusca {
         try {
 
             query = query.replaceAll("[0-9]", "");
-            System.out.println(query + " QUERY *** ");
 
             lines = Files.readAllLines(Paths.get("stopwords.txt"), StandardCharsets.UTF_8);
             stopwords = lines.toArray(new String[lines.size()]);
@@ -200,6 +199,31 @@ public class MotorDeBusca {
             hash.put(optimizedQuery[j], count);
         }
         return hash;
+    }
+
+
+    public double[][] resultMatrixCalc() {
+        double calculo;
+        matriz = new double[filesName.length][optimizedQuery.length];
+        HashMap<String, Integer> hash;
+        hash = countDocumentsWithWord();
+        for (int i = 0; i < numeroOcurrences.length; i++) {
+            for (int j = 0; j < numeroOcurrences[0].length; j++) {
+                if (hash.containsKey(optimizedQuery[j])) {
+                    Integer value = hash.get(optimizedQuery[j]);
+                    if (value == 0) {
+                        calculo = 0.0;
+                    } else {
+                        double x = (double) filesName.length;
+                        double y = (double) value;
+                        calculo = numeroOcurrences[i][j] * 1 + Math.log10(x / y);
+                    }
+                    matriz[i][j] = calculo;
+
+                }
+            }
+        }
+        return matriz;
     }
 
 
