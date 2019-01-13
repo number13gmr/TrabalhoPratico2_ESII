@@ -283,6 +283,18 @@ public class MotorDeBusca {
                 }
             }
 
+
+    public void showOnlyFiles(int nmrFiles) throws NotInAValidIntervalException{
+        sortFilesBySim();
+
+        if(nmrFiles > filesName.length){
+            throw new NotInAValidIntervalException("Apenas existem " + filesName.length);
+        }
+
+        for (int i = 0; i < filesName.length; i++) {
+            System.out.println("O ficheiro " + filesName[i] + " tem um grau de " +
+                    grauSlim[i] + " similaridade");
+
         }
     }
 
