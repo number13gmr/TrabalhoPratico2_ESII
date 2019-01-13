@@ -250,6 +250,24 @@ public class MotorDeBusca {
         }
         return grauSlim;
     }
+
+    public void sortFilesBySim(){
+
+        for (int i = 0; i <grauSlim.length-1 ; i++) {
+            for (int j = 0; j < grauSlim.length - i - 1; j++) {
+                if (grauSlim[j] < grauSlim[j + 1]) {
+                    double temp = grauSlim[j];
+                    String tempName = this.filesName[j];
+                    grauSlim[j] = grauSlim[j + 1];
+                    this.filesName[j] = this.filesName[j + 1];
+                    grauSlim[j + 1] = temp;
+                    this.filesName[j + 1] = tempName;
+                }
+            }
+        }
+    }
+
+
 }
 
 
