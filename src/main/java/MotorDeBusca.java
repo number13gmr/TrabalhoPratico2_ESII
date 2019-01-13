@@ -1,9 +1,9 @@
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +16,11 @@ public class MotorDeBusca {
     private String[] optimizedQuery;
 
     //Matriz com o numero de ocurrencias
-    private int[][] numeroOcurrences;
+    private double[][] numeroOcurrences;
+
+    private double[][] matriz;
+
+    private double[] grauSlim;
 
     /**
      * @param directoryName , nome do diretorio que contém os ficheiros
@@ -45,14 +49,13 @@ public class MotorDeBusca {
             filesName = new String[fList.length];
             //Cria um vetor apenas com o nome dos ficheiros
             for (int i = 0; i < fList.length; i++) {
-                    filesName[i] = fList[i].getName();
+                filesName[i] = fList[i].getName();
             }
 
 
             //Adiciona o conteudo dos ficheiros a um vetor de string
             for (int i = 0; i < filesName.length; i++) {
                 File file = new File(directoryName + "/" + filesName[i]);
-
 
                 BufferedReader b = null;
 
@@ -97,9 +100,15 @@ public class MotorDeBusca {
         List<String> lines = null;
 
         try {
+
+            query = query.replaceAll("[0-9]", "");
+            System.out.println(query + " QUERY *** ");
+
             lines = Files.readAllLines(Paths.get("stopwords.txt"), StandardCharsets.UTF_8);
             stopwords = lines.toArray(new String[lines.size()]);
             String stringStopwords = null;
+
+
 
             //MOSTRA TODAS AS PALAVRAS DO STOPWORDS
 
@@ -116,6 +125,7 @@ public class MotorDeBusca {
             split = query.split(" ");
             List<String> novo = new ArrayList<>();
 
+
             for (int i = 0; i < split.length; i++) {
                 Matcher m = Pattern.compile(Pattern.quote(split[i]), Pattern.CASE_INSENSITIVE).matcher(stringStopwords);
 
@@ -130,8 +140,11 @@ public class MotorDeBusca {
                 }
             }
 
-         //   this.optimizedQuery = novo.toArray(new String[0]);
             this.optimizedQuery = novo.toArray(new String[0]);
+
+            if(optimizedQuery.length == 0){
+                throw new IllegalArgumentException("Nao existem palavras para pesquisar!");
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,13 +157,13 @@ public class MotorDeBusca {
 
     /**
      * Metodo responsavel por calcular o numero de ocurrencias da Query inserido pelo utlizador nos ficheiro
+     *
      * @return matriz com um numero de ocurrencias de cada palavra nos ficheiros
      */
-    public int[][] n_ocurrences() {
+    public double[][] n_ocurrences() {
 
 
-
-        this.numeroOcurrences = new int[this.filesName.length][this.optimizedQuery.length];
+        this.numeroOcurrences = new double[this.filesName.length][this.optimizedQuery.length];
 
         for (int i = 0; i < this.filesName.length; i++) {
             for (int j = 0; j < this.optimizedQuery.length; j++) {
@@ -158,23 +171,20 @@ public class MotorDeBusca {
 
                 Matcher m = Pattern.compile(Pattern.quote(this.optimizedQuery[j]), Pattern.CASE_INSENSITIVE).matcher(this.fileContent[i]);
 
-                int matches = 0;
+                double matches = 0.0;
                 //Conta quantos encontrou
                 while (m.find()) {
                     matches++;
                 }
+
                 //Atribiu quantos encontrou
-               // System.out.println("Encontrou:" + matches + " palavra" + this.optimizedQuery[j] + " ficheiro" + this.fileContent[i]);
                 this.numeroOcurrences[i][j] = matches;
             }
         }
-
-     return this.numeroOcurrences;
+        return this.numeroOcurrences;
     }
 
 }
-
-
 
 
 
