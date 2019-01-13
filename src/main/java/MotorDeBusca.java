@@ -226,10 +226,35 @@ public class MotorDeBusca {
         return matriz;
     }
 
+    public double[] caclGrauSlim(){
+
+        grauSlim = new double[filesName.length];
+        double soma, mlxq, somaM, somaQ, divisor;
 
 
-
-
+        for (int i = 0; i < matriz.length; i++) {
+            soma = 0.0;
+            somaM = 0.0;
+            somaQ = 0.0;
+            for (int j = 0; j < matriz[0].length; j++) {
+                mlxq = matriz[i][j] * numeroOcurrences[i][j];
+                soma += mlxq;
+                somaM += Math.pow(matriz[i][j], 2);
+                somaQ += Math.pow(numeroOcurrences[i][j],2);
+            }
+            divisor = ((Math.sqrt(somaM)) * (Math.sqrt(somaQ)));
+            if(divisor == 0) {
+                grauSlim[i] = 0.0;
+            }else{
+                grauSlim[i] = soma / ((Math.sqrt(somaM)) * (Math.sqrt(somaQ)));
+            }
+        }
+        System.out.println("CACULOOOOOOOOOOOOOOO");
+        for (int i = 0; i < grauSlim.length; i++) {
+            System.out.println(grauSlim[i]);
+        }
+        return grauSlim;
+    }
 }
 
 
