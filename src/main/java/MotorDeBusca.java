@@ -184,6 +184,28 @@ public class MotorDeBusca {
         return this.numeroOcurrences;
     }
 
+    public HashMap<String, Integer> countDocumentsWithWord() {
+
+        int count = 0, i, j;
+
+        HashMap<String, Integer> hash = new HashMap<>();
+
+        for (j = 0; j < numeroOcurrences[0].length; j++) {
+            count = 0;
+            for (i = 0; i < numeroOcurrences.length; i++) {
+                if (numeroOcurrences[i][j] > 0) {
+                    count++;
+                }
+            }
+            hash.put(optimizedQuery[j], count);
+        }
+        return hash;
+    }
+
+
+
+
+
 }
 
 
