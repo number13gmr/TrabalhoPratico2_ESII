@@ -43,7 +43,6 @@ public class TestCalcGrauSim {
         double[][] matrice = m.n_ocurrences();
         double[][] matrice2 = m.resultMatrixCalc();
         double[] novo = m.calcGrauSim();
-        System.out.println(novo[0] + " " + novo[1] + " " + novo[2]);
 
         double[] expected = {0.0, 1.0, 0.0};
         Assertions.assertArrayEquals(expected, m.calcGrauSim());
