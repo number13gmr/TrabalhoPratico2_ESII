@@ -175,7 +175,6 @@ public class MotorDeBusca {
                 while (m.find()) {
                     matches++;
                 }
-
                 //Atribiu quantos encontrou
                 this.numeroOcurrences[i][j] = matches;
             }
@@ -226,7 +225,7 @@ public class MotorDeBusca {
         return matriz;
     }
 
-    public double[] caclGrauSlim(){
+    public double[] calcGrauSim(){
 
         grauSlim = new double[filesName.length];
         double soma, mlxq, somaM, somaQ, divisor;
@@ -248,10 +247,6 @@ public class MotorDeBusca {
             }else{
                 grauSlim[i] = soma / ((Math.sqrt(somaM)) * (Math.sqrt(somaQ)));
             }
-        }
-        System.out.println("CACULOOOOOOOOOOOOOOO");
-        for (int i = 0; i < grauSlim.length; i++) {
-            System.out.println(grauSlim[i]);
         }
         return grauSlim;
     }

@@ -2,32 +2,30 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class testResultMatrixCalc {
+public class TestCalcGrauSim {
     MotorDeBusca m=new MotorDeBusca();
 
     @BeforeEach
     public void init(){
         try {
             m.readFiles("Files");
+            m.optimizeQuery("Mario de Pedro");
+            double[][] matrice = m.n_ocurrences();
+            double[][] matrice2 = m.resultMatrixCalc();
         } catch (EmptyDirectoryException e) {
             e.printStackTrace();
         } catch (NotFoundDirectory notFoundDirectory) {
             notFoundDirectory.printStackTrace();
-        }
-        try {
-            m.optimizeQuery("Mario de Escola");
         } catch (NotInAValidIntervalException e) {
             e.printStackTrace();
         }
-        double[][] xd=m.n_ocurrences();
+
 
     }
 
     @Test
-    public void testCase1(){
-        double[][] expected= {{2.0,0.0},{1.0,0.0},{1.0,0.0}};
-        Assertions.assertArrayEquals(expected,m.resultMatrixCalc());
+    public void testCalcGrauSim1(){
+        double[] expected = {0.9727041202799769, 0.9819511386468481, 0.9025341732201746};
+        Assertions.assertArrayEquals(expected, m.calcGrauSim());
     }
-
-
 }
