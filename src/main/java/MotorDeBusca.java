@@ -22,6 +22,7 @@ public class MotorDeBusca {
 
     private double[] grauSlim;
 
+
     /**
      * @param directoryName , nome do diretorio que contém os ficheiros
      * @return Um vetor de strings com o couteudo dos ficheiros
@@ -85,6 +86,7 @@ public class MotorDeBusca {
 
     /**
      * Metodo resposavel por optimizar a Query, remover palavras que nao façam sentido procurar
+     *
      * @param query String inserida pelo utilizador
      * @return Query otimizada
      */
@@ -107,7 +109,6 @@ public class MotorDeBusca {
             lines = Files.readAllLines(Paths.get("stopwords.txt"), StandardCharsets.UTF_8);
             stopwords = lines.toArray(new String[lines.size()]);
             String stringStopwords = null;
-
 
 
             //MOSTRA TODAS AS PALAVRAS DO STOPWORDS
@@ -142,7 +143,7 @@ public class MotorDeBusca {
 
             this.optimizedQuery = novo.toArray(new String[0]);
 
-            if(optimizedQuery.length == 0){
+            if (optimizedQuery.length == 0) {
                 throw new IllegalArgumentException("Nao existem palavras para pesquisar!");
             }
 
@@ -201,9 +202,6 @@ public class MotorDeBusca {
         }
         return hash;
     }
-
-
-
 
 
 }
