@@ -2,8 +2,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.util.Arrays;
-
 public class TestOptimizeQuery {
     private MotorDeBusca m;
 
@@ -46,7 +44,7 @@ public class TestOptimizeQuery {
     @Test
     public void testOptimizeQuery3() {
         String s = "Pedro realiza teste com 29 cr";
-        String[] optimize = {"Pedro", "realiza", "teste", "29", "cr"};
+        String[] optimize = {"Pedro", "realiza", "teste", "cr"};
         try {
             Assertions.assertArrayEquals(optimize, m.optimizeQuery(s));
         } catch (NotInAValidIntervalException e) {
@@ -61,8 +59,8 @@ public class TestOptimizeQuery {
 
     @Test
     public void testOptimizeQuery4() {
-        String s = "Pedro realiza teste com 30 crc";
-        String[] optimize = {"Pedro", "realiza", "teste", "30", "crc"};
+        String s = "Pedro realiza teste com de crc";
+        String[] optimize = {"Pedro", "realiza", "teste", "crc"};
 
         try {
             Assertions.assertArrayEquals(optimize, m.optimizeQuery(s));
@@ -83,25 +81,40 @@ public class TestOptimizeQuery {
     }
 
     /**
-     * Caso de teste em que é inserida uma String NULL.
+     * Caso de teste em que é inserida uma String com stopwords.
      * TestCaseID: 06
      */
 
     @Test
     public void testOptimizeQuery6() {
-        Assertions.assertThrows(java.lang.NullPointerException.class, () -> m.optimizeQuery(null));
-    }
-
-    /**
-     * Caso de teste em que é inserida uma String com stopwords.
-     * TestCaseID: 07
-     */
-
-    @Test
-    public void testOptimizeQuery7() {
         String[] expected = {"Pedro"};
         try {
             Assertions.assertArrayEquals(expected, m.optimizeQuery("O Pedro de"));
+        } catch (NotInAValidIntervalException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Caso de teste em que é inserida uma String apenas com números.
+     * TestCaseID: 07
+     */
+    @Test
+    public void testOptimizeQuery7() {
+            Assertions.assertThrows(IllegalArgumentException.class, () -> m.optimizeQuery("12345"));
+
+    }
+
+    /**
+     * Caso de teste em que é inserida uma String com um nome válido e números.
+     * TestCaseID: 08
+     */
+
+    @Test
+    public void testOptimizeQuery8() {
+        String[] expected = {"Pedro"};
+        try {
+            Assertions.assertArrayEquals(expected, m.optimizeQuery("Pedro1234"));
         } catch (NotInAValidIntervalException e) {
             e.printStackTrace();
         }
