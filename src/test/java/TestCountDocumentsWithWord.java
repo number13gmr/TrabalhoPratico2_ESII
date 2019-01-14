@@ -39,10 +39,5 @@ public class TestCountDocumentsWithWord {
         expected.put("Estg",0);
 
         Assertions.assertTrue(expected.equals(m.countDocumentsWithWord()));
-
-
-
-
-
     }
 }
