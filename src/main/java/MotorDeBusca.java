@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 public class MotorDeBusca {
 
-
     private String[] filesName;
     private String[] fileContent;
     private String[] optimizedQuery;
@@ -85,6 +84,7 @@ public class MotorDeBusca {
 
     /**
      * Metodo resposavel por optimizar a Query, remover palavras que nao façam sentido procurar
+     *
      * @param query String inserida pelo utilizador
      * @return Query otimizada
      */
@@ -106,7 +106,6 @@ public class MotorDeBusca {
             lines = Files.readAllLines(Paths.get("stopwords.txt"), StandardCharsets.UTF_8);
             stopwords = lines.toArray(new String[lines.size()]);
             String stringStopwords = null;
-
 
 
             //MOSTRA TODAS AS PALAVRAS DO STOPWORDS
@@ -141,7 +140,7 @@ public class MotorDeBusca {
 
             this.optimizedQuery = novo.toArray(new String[0]);
 
-            if(optimizedQuery.length == 0){
+            if (optimizedQuery.length == 0) {
                 throw new IllegalArgumentException("Nao existem palavras para pesquisar!");
             }
 
@@ -225,7 +224,7 @@ public class MotorDeBusca {
         return matriz;
     }
 
-    public double[] calcGrauSim(){
+    public double[] calcGrauSim() {
 
         grauSlim = new double[filesName.length];
         double soma, mlxq, somaM, somaQ, divisor;
@@ -239,21 +238,21 @@ public class MotorDeBusca {
                 mlxq = matriz[i][j] * numeroOcurrences[i][j];
                 soma += mlxq;
                 somaM += Math.pow(matriz[i][j], 2);
-                somaQ += Math.pow(numeroOcurrences[i][j],2);
+                somaQ += Math.pow(numeroOcurrences[i][j], 2);
             }
             divisor = ((Math.sqrt(somaM)) * (Math.sqrt(somaQ)));
-            if(divisor == 0) {
+            if (divisor == 0) {
                 grauSlim[i] = 0.0;
-            }else{
+            } else {
                 grauSlim[i] = soma / ((Math.sqrt(somaM)) * (Math.sqrt(somaQ)));
             }
         }
         return grauSlim;
     }
 
-    public void sortFilesBySim(){
+    public void sortFilesBySim() {
 
-        for (int i = 0; i <grauSlim.length-1 ; i++) {
+        for (int i = 0; i < grauSlim.length - 1; i++) {
             for (int j = 0; j < grauSlim.length - i - 1; j++) {
                 if (grauSlim[j] < grauSlim[j + 1]) {
                     double temp = grauSlim[j];
@@ -267,35 +266,34 @@ public class MotorDeBusca {
         }
     }
 
-    public void similaridadeSuperior(double sup) {
+    public ArrayList<String> similaridadeSuperior(double sup) throws NotInAValidIntervalException {
         this.sortFilesBySim();
-
+        ArrayList<String> simSup = new ArrayList<>();
 
         if (sup > this.grauSlim[0]) {
-            System.out.println("Nao existem ficheiros com grau superior ao inserido");
+            throw new NotInAValidIntervalException("Nao existem ficheiros com grau superior ao inserido");
         } else {
-
-
             for (int i = 0; i < this.grauSlim.length; i++) {
                 if (this.grauSlim[i] > sup) {
+                    simSup.add(this.filesName[i] + " " + this.grauSlim[i]);
                     System.out.println(this.filesName[i] + " " + this.grauSlim[i]);
                 }
             }
         }
+        return simSup;
     }
 
-    public void showOnlyFiles(int nmrFiles) throws NotInAValidIntervalException{
+    public ArrayList<String> showOnlyFiles(int nmrFiles) throws NotInAValidIntervalException {
         sortFilesBySim();
-
-        if(nmrFiles > filesName.length){
+        ArrayList<String> show = new ArrayList<>();
+        if (nmrFiles > filesName.length || nmrFiles < 0) {
             throw new NotInAValidIntervalException("Apenas existem " + filesName.length);
+        } else {
+            for (int i = 0; i < nmrFiles; i++) {
+                show.add("O ficheiro " + filesName[i] + " tem um grau de " + grauSlim[i] + " similaridade");
+            }
         }
-
-        for (int i = 0; i < filesName.length; i++) {
-            System.out.println("O ficheiro " + filesName[i] + " tem um grau de " +
-                    grauSlim[i] + " similaridade");
-
-        }
+        return show;
     }
 
 
