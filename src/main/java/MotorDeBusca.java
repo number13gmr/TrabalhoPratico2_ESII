@@ -77,7 +77,7 @@ public class MotorDeBusca {
 
             }
 
-            return this.fileContent;
+            return this.filesName;
         }
     }
 
@@ -276,7 +276,6 @@ public class MotorDeBusca {
             for (int i = 0; i < this.grauSlim.length; i++) {
                 if (this.grauSlim[i] > sup) {
                     simSup.add(this.filesName[i] + " " + this.grauSlim[i]);
-                    System.out.println(this.filesName[i] + " " + this.grauSlim[i]);
                 }
             }
         }
@@ -286,7 +285,7 @@ public class MotorDeBusca {
     public ArrayList<String> showOnlyFiles(int nmrFiles) throws NotInAValidIntervalException {
         sortFilesBySim();
         ArrayList<String> show = new ArrayList<>();
-        if (nmrFiles > filesName.length || nmrFiles < 0) {
+        if (nmrFiles > filesName.length || nmrFiles <= 0) {
             throw new NotInAValidIntervalException("Apenas existem " + filesName.length);
         } else {
             for (int i = 0; i < nmrFiles; i++) {
