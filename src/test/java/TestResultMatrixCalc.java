@@ -23,6 +23,11 @@ public class TestResultMatrixCalc {
 
     }
 
+    /**
+     * TestCaseID: 1
+     * Verifica se o calculo da matriz corresponde ao esperado.
+     */
+
     @Test
     public void testCase1(){
         double[][] expected= {{2.0,0.0},{1.0,0.0},{1.0,0.0}};

@@ -155,7 +155,6 @@ public class MotorDeBusca {
 
     /**
      * Metodo responsavel por calcular o numero de ocurrencias da Query inserido pelo utlizador nos ficheiro
-     *
      * @return matriz com um numero de ocurrencias de cada palavra nos ficheiros
      */
     public double[][] n_ocurrences() {
@@ -181,6 +180,12 @@ public class MotorDeBusca {
         return this.numeroOcurrences;
     }
 
+    /**
+     * Conta em quantos documentos aparece pelo menos cada uma das palavras inseridas pelo utilizador
+     * @return uma hash onde a chave e o nome da palavra e o valor e o numero de vezes que aparece
+     * a palavra pelo menos uma vez em cada um dos ficheiros
+     */
+
     public HashMap<String, Integer> countDocumentsWithWord() {
 
         int count = 0, i, j;
@@ -199,6 +204,11 @@ public class MotorDeBusca {
         return hash;
     }
 
+    /**
+     * Método que executa o cálculo da fase de preparacao A.
+     * @return uma matriz onde a linha e o nome do ficheiro e a coluna, a palavra,
+     * em cada linha/coluna irá aparecer o valor do calculo associado a respetiva ficheiro/palavra
+     */
 
     public double[][] resultMatrixCalc() {
         double calculo;
@@ -223,6 +233,11 @@ public class MotorDeBusca {
         }
         return matriz;
     }
+
+    /**
+     * Método que efetua o calculo da fase de calculo B.
+     * @return um array com  grau de similaridade de cada ficheiro.
+     */
 
     public double[] calcGrauSim() {
 
@@ -250,6 +265,10 @@ public class MotorDeBusca {
         return grauSlim;
     }
 
+    /**
+     * Método que ordena os ficheiros por grau de similaridade por ordem descendente
+     */
+
     public void sortFilesBySim() {
 
         for (int i = 0; i < grauSlim.length - 1; i++) {
@@ -266,6 +285,14 @@ public class MotorDeBusca {
         }
     }
 
+    /**
+     * Metodo responsável por devolver uma lista de strings com os ficheiros que apresentam um grau
+     * de superioridade superior ao desejado pelo utilizador
+     * @param sup valor minimo desejado pelo utilizador como grau de similaridade
+     * @return lista de strings com os ficheiros que apresentam um grau de superioridade superior ao desejado
+     * @throws NotInAValidIntervalException quando o utilizador insere um grau de superioridade superior ao que existe
+     */
+
     public ArrayList<String> similaridadeSuperior(double sup) throws NotInAValidIntervalException {
         this.sortFilesBySim();
         ArrayList<String> simSup = new ArrayList<>();
@@ -281,6 +308,13 @@ public class MotorDeBusca {
         }
         return simSup;
     }
+
+    /**
+     *
+     * @param nmrFiles Numero de ficheiros que o utilizador quer que seja mostrado
+     * @return uma lista de strings com um numero total de ficheiros que o utilizador inseriu, e o grau respetivo
+     * @throws NotInAValidIntervalException quando o nmrFiles introduzido pelo utilizador e superior ao numero de ficheiros existentes ou menor ou igual a 0.
+     */
 
     public ArrayList<String> showOnlyFiles(int nmrFiles) throws NotInAValidIntervalException {
         sortFilesBySim();

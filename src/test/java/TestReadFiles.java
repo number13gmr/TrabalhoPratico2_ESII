@@ -17,6 +17,7 @@ public class TestReadFiles {
 
     /**
      * Caso de teste em que o diretorio nao existe
+     * TestCaseID: 1
      */
 
     @Test
@@ -26,6 +27,7 @@ public class TestReadFiles {
 
     /**
      * Caso de teste em que o diretorio existe e tem 3 ficheiros
+     * TestCaseID: 2
      */
 
     @Test
@@ -48,6 +50,7 @@ public class TestReadFiles {
 
     /**
      * Caso de teste em que o diretorio existe mas nao contem ficheiros
+     * TestCaseID: 3
      */
 
     @Test

@@ -27,6 +27,12 @@ public class TestShowOnlyFiles {
         }
     }
 
+    /**
+     * TestCaseID: 1
+     * Dada a existencia de 3 ficheiros, verifica se o numero de ficheiros (3) pedido pelo utilizador
+     * e igual ao que lista no final.
+     */
+
     @Test
     public void testShowOnlyFiles1() {
         try {
@@ -37,11 +43,22 @@ public class TestShowOnlyFiles {
         }
     }
 
+    /**
+     * TestCaseID: 2
+     * Dada a existencia de 3 ficheiros no repositorio, verifica se o metodo lanca a excecao
+     * caso o utilizador insira que quer visualizar 4 ficheiros.
+     */
+
     @Test
     public void testShowOnlyFiles2() {
         Assertions.assertThrows(NotInAValidIntervalException.class, () -> m.showOnlyFiles(4));
     }
 
+    /**
+     * TestCaseID: 3
+     * Verifica se o metodo lanca excecao caso o utilizador insira um numero negativo de ficheiros que
+     * quer visualizar.
+     */
     @Test
     public void testShowOnlyFiles3(){
         Assertions.assertThrows(NotInAValidIntervalException.class, () -> m.showOnlyFiles(-1));

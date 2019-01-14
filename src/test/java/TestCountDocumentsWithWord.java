@@ -15,11 +15,12 @@ public class TestCountDocumentsWithWord {
 
 
     /**
-     * Teste case #1
+     * TesteCaseID: 1
+     *
      */
 
     @Test
-    public void testCount(){
+    public void testCount1(){
         try {
             m.readFiles("Files");
         } catch (EmptyDirectoryException e) {

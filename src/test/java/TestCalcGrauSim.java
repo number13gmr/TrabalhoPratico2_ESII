@@ -19,6 +19,12 @@ public class TestCalcGrauSim {
 
     }
 
+    /**
+     * TestCaseID: 1
+     * Verifica se o metodo efetua o calculo corretamente, verificando se o array que o metodo retorna
+     * e igual ao esperado
+     */
+
     @Test
     public void testCalcGrauSim1() {
         try {
@@ -32,6 +38,12 @@ public class TestCalcGrauSim {
         double[] expected = {0.9727041202799769, 0.9819511386468481, 0.9025341732201746};
         Assertions.assertArrayEquals(expected, m.calcGrauSim());
     }
+
+    /**
+     * TestCaseID: 2
+     * Verifica se caso o divisor seja 0, ou seja, impossivel, o metodo defina o
+     * calculo do ficheiro como 0.
+     */
 
     @Test
     public void testCalcGrauSim2() {
