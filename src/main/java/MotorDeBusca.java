@@ -310,7 +310,6 @@ public class MotorDeBusca {
     }
 
     /**
-     *
      * @param nmrFiles Numero de ficheiros que o utilizador quer que seja mostrado
      * @return uma lista de strings com um numero total de ficheiros que o utilizador inseriu, e o grau respetivo
      * @throws NotInAValidIntervalException quando o nmrFiles introduzido pelo utilizador e superior ao numero de ficheiros existentes ou menor ou igual a 0.
